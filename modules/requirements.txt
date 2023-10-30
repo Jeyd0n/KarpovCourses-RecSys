@@ -1,8 +1,0 @@
-fastapi
-uvicorn
-psycopg2
-sqlalchemy
-pydantic
-pandas
-numpy
-catboost
