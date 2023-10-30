@@ -1,22 +1,22 @@
-import psycopg2
+import os
+import sys
+
+sys.path.append('..')
+
+
 from typing import List
-from pydantic import BaseModel
-from fastapi import FastAPI, Depends, HTTPException
-from sqlalchemy.sql.functions import count
-from sqlalchemy import create_engine
-from psycopg2.extras import RealDictCursor
-from datetime import datetime
+from fastapi import FastAPI
 import pandas as pd
-from catboost import CatBoostClassifier
-from load_my_features import batch_load_sql, load_features
-from model_loading import get_model_path, load_models
-from schema import PostGet
-from get_top_5_posts import get_top_5_posts
+from modules.load_my_features import load_features
+from modules.model_loading import load_models
+from modules.schema import PostGet
+from modules.get_top_5_posts import get_top_5_posts
 import os
 
 
-database = 'postgresql://robot-startml-ro:pheiph0hahj1Vaif@postgres.lab.karpov.courses:6432/startml'
+sys.path.append('..')
 
+database = os.getenv('POSTGRES_KEY')
 model = load_models()
 data = load_features().drop('target', axis=1)
 
